@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1">
+    <title>IT 3203 - History of HTML</title>
+    <link rel="stylesheet" href="css/main.css"> 
+</head>    
+<body>
+    <nav>
+        <h1><u> Contents</u></h1>
+        <a href="homepage.html"></a>
+        <ul>
+            <li><a href="newhomepage.html">The History of HTML</a></li>
+            <li><a href="how.html">How was HTML Created?</a></li>
+            <li><a href="What.html">What is HTML?</a></li>
+            <li><a href="Evolution.html">The Evolution of HTML</a></li>
+            <li><a href="WhatFor.html">What is HTML used for?</a></li>    
+            <li><a href="Ref.html">Resources and References</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h1><u>HTML Self-Assessment Quiz</u></h1>
+
+<form id="quizForm">
+  <div class="question">
+    <p>1. What does HTML stand for?</p>
+    <label><input type="radio" name="q1" value="a"> Hyper Trainer Marking Language</label><br>
+    <label><input type="radio" name="q1" value="b"> Hyper Text Markup Language</label><br>
+    <label><input type="radio" name="q1" value="c"> HyperText Machine Language</label>
+  </div>
+
+  <div class="question">
+    <p>2. Who invented HTML?</p>
+    <label><input type="radio" name="q2" value="a"> Elon Musk</label><br>
+    <label><input type="radio" name="q2" value="b"> Bill Gates</label><br>
+    <label><input type="radio" name="q2" value="c"> Tim Berners-Lee</label>
+  </div>
+
+  <div class="question">
+    <p>3. Which tag is used to create a hyperlink in HTML?</p>
+    <label><input type="radio" name="q3" value="a">&lt;link&gt;</label><br>
+    <label><input type="radio" name="q3" value="b">&lt;a&gt;</label><br>
+    <label><input type="radio" name="q3" value="c">&lt;href&gt;</label>
+  </div>
+
+  <div class="question">
+    <p>4. Fill in the blank: The standard file extension for an HTML document is <input type="text" name="q4" placeholder="Your answer here">.</p>
+  </div>
+
+  <div class="question">
+    <p>5. Which of the following are valid HTML elements? (Choose all that apply)</p>
+    <label><input type="checkbox" name="q5" value="a">&lt;p&gt;</label><br>
+    <label><input type="checkbox" name="q5" value="b">&lt;div&gt;</label><br>
+    <label><input type="checkbox" name="q5" value="c">&lt;section&gt;</label><br>
+    <label><input type="checkbox" name="q5" value="d">&lt;slide&gt;</label>
+  </div>
+
+  <button type="button" onclick="submitQuiz()">Submit</button>
+  <button type="button" onclick="resetQuiz()">Restart</button>
+</form>
+
+<div class="results" id="results"></div>
+
+<script>
+  function submitQuiz() {
+    let score = 0;
+    let output = '';
+    const total = 5;
+
+    // Question 1
+    const q1 = document.querySelector('input[name="q1"]:checked');
+    const ans1 = q1 ? q1.value : '';
+    if (ans1 === 'b') {
+      score++;
+      output += '<p class="correct">Q1 Correct</p>';
+    } else {
+      output += '<p class="incorrect">Q1 Incorrect (Correct: b - Hyper Text Markup Language)</p>';
+    }
+
+    // Question 2
+    const q2 = document.querySelector('input[name="q2"]:checked');
+    const ans2 = q2 ? q2.value : '';
+    if (ans2 === 'c') {
+      score++;
+      output += '<p class="correct">Q2 Correct</p>';
+    } else {
+      output += '<p class="incorrect">Q2 Incorrect (Correct: c - Tim Berners-Lee)</p>';
+    }
+
+    // Question 3
+    const q3 = document.querySelector('input[name="q3"]:checked');
+    const ans3 = q3 ? q3.value : '';
+    if (ans3 === 'b') {
+      score++;
+      output += '<p class="correct">Q3 Correct</p>';
+    } else {
+      output += '<p class="incorrect">Q3 Incorrect (Correct: b - &lt;a&gt;)</p>';
+    }
+
+    // Question 4
+    const q4 = document.querySelector('input[name="q4"]').value.trim().toLowerCase();
+    if (q4 === 'html' || q4 === '.html') {
+      score++;
+      output += '<p class="correct">Q4 Correct</p>';
+    } else {
+      output += '<p class="incorrect">Q4 Incorrect (Correct: .html)</p>';
+    }
+
+    // Question 5
+    const q5 = document.querySelectorAll('input[name="q5"]:checked');
+    const correctAnswers = ['a', 'b', 'c'];
+    const selected = Array.from(q5).map(cb => cb.value);
+    const isCorrect = correctAnswers.every(val => selected.includes(val)) && selected.every(val => correctAnswers.includes(val));
+    if (isCorrect) {
+      score++;
+      output += '<p class="correct">Q5 Correct</p>';
+    } else {
+      output += '<p class="incorrect">Q5 Incorrect (Correct: &lt;p&gt;, &lt;div&gt;, &lt;section&gt;)</p>';
+    }
+
+    const passFail = score >= 4 ? '<strong style="color:green;">PASS</strong>' : '<strong style="color:red;">FAIL</strong>';
+    document.getElementById('results').innerHTML = `
+      <h2>Your Results</h2>
+      ${output}
+      <p><strong>Total Score: ${score} / ${total}</strong></p>
+      <p>Result: ${passFail}</p>
+    `;
+  }
+
+  function resetQuiz() {
+    document.getElementById('quizForm').reset();
+    document.getElementById('results').innerHTML = '';
+  }
+</script>
+
+</body>
+</html>
